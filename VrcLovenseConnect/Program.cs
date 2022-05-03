@@ -35,30 +35,33 @@ await buttplugManager.FindToy();
 Console.WriteLine("Scanning toys through Lovense Connect...");
 await lovenseManager.FindToy();
 
-if (lovenseManager.IsToyFound || buttplugManager.IsToyFound)
-{
-    try
-    {
-        // Saves detected settings to file.
-        SaveToys(lovenseManager, "Lovense");
-        SaveToys(buttplugManager, "Buttplug");
-        File.WriteAllText("config.json", JsonConvert.SerializeObject(config, Formatting.Indented));
-    }
-    catch (Exception ex)
-    {
-        Logger.LogException(ex);
-        return;
-    }
-
-    ConsoleHelper.PrintInfo("INFO: Although an attempt to stop the toys will be happening before closing the program, you may still have to manually turn them off.");
-}
-else
+if (!lovenseManager.IsToyFound && !buttplugManager.IsToyFound)
 {
     ConsoleHelper.PrintError("ERROR: Cannot find a toy. Please make sure Bluetooth is active and your toy is connected to your computer.");
     ConsoleHelper.PrintError("For detection through Lovense Connect, check the address in the config.json file and make sure your toy is connected to Lovense Connect on your phone.");
     ConsoleHelper.AwaitUserKeyPress();
     return;
 }
+
+try
+{
+    // Saves detected settings to file.
+    SaveToys(lovenseManager, "Lovense");
+    SaveToys(buttplugManager, "Buttplug");
+    File.WriteAllText("config.json", JsonConvert.SerializeObject(config, Formatting.Indented));
+}
+catch (Exception ex)
+{
+    Logger.LogException(ex);
+    return;
+}
+
+// After finding toys, removes empty slots and unfound toys from memory
+config.Toys.RemoveAll(toy => string.IsNullOrWhiteSpace(toy.Name)
+|| (toy.Protocol == "Lovense" && !lovenseManager.ToyNames.Contains(toy.Name))
+|| (toy.Protocol == "Buttplug" && !buttplugManager.ToyNames.Contains(toy.Name)));
+
+ConsoleHelper.PrintInfo("INFO: Although an attempt to stop the toys will be happening before closing the program, you may still have to manually turn them off.");
 
 oscModule = new OscModule(config, lovenseManager, buttplugManager);
 
