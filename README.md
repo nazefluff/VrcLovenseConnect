@@ -96,14 +96,12 @@ For orifices that you want to set up with VRCLovenseConnect, you can place Conta
 
 ### Recommended Contacts Setup
 For a penetrator:
-- one Contact Receiver with at least the "Hands" standard tag, and "Allow Self" and "Allow Others" enabled.
 - one Contact Receiver with an "Orifice" custom tag, and "Allow Others" enabled only.
 - one Contact Sender with a "Penetrator" tag.
 - (Optional) one Contact Receiver with an "OrificeSelf" custom tag, and "Allow Self" enabled only.
 - (Optional) one Contact Sender with a "PenetratorSelf" tag.
 
 For each orifice on which you want toy interactions enabled:
-- one Contact Receiver with at least the "Fingers" standard tag, and "Allow Self" and "Allow Others" enabled.
 - one Contact Receiver with a "Penetrator" custom tag, and "Allow Others" enabled only.
 - one Contact Sender with an "Orifice" tag (can have a different shape than the Receiver).
 - (Optional) one Contact Receiver with a "PenetratorSelf" custom tag, and "Allow Self" enabled only.
