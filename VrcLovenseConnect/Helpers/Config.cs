@@ -35,6 +35,11 @@ namespace VrcLovenseConnect.Helpers
         /// </summary>
         public int Limit { get; set; }
 
+        /// <summary>
+        /// The time to wait between two attempts at receiving messages.
+        /// </summary>
+        public int SleepTime => Limit * 10;
+
         public List<ToyConfig> Toys { get; set; }
 
         /// <summary>

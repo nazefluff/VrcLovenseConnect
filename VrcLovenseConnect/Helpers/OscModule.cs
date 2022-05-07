@@ -105,6 +105,11 @@ namespace VrcLovenseConnect.Helpers
                             }
                         }
                     }
+                    else
+                    {
+                        // Waits between two listenings to reduce CPU usage.
+                        Thread.Sleep(config.SleepTime);
+                    }
                 }
                 catch (Exception ex)
                 {
