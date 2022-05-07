@@ -8,7 +8,6 @@ It has been tested to be **accurate**, **lightweight** and **fast**. OSC is so f
 
 ## Requirements
 - A bluetooth dongle connected to your PC OR Lovense Connect for Android or iOS (the PC version requires a specific Lovense Bluetooth dongle).
-- ~~At least 8/128 of free memory in your Avatar Expression Parameters, or 1/128 if not using Proximity mode.~~ Not a requirement since build 1188.
 
 # Toy Setup
 There are currently two protocols available for VRCLovenseConnect: "Lovense" and "Buttplug".
@@ -21,11 +20,13 @@ Simply connect your toys to your PC through a cable or Bluetooth. Lovense toys s
 You can test the connectivity of your toys with Intiface Desktop.
 
 ## Lovense Connect
-Open the Lovense Connect app on your phone or PC, then select the green shield icon to reveal a URL.
+Certain Lovense features such as the contraction for Max 2 are only controllable through Lovense Connect.
+
+Open the Lovense Connect app on your phone or PC, then select the green shield icon to reveal a URL (ex: https://192-168-2-19.lovense.club:30010/GetToys).
 
 In the config.json file next to the executable, copy this URL to the "address" field.
 
-> *NOTE*: Certain Lovense features such as the contraction for Max 2 are only controllable through Lovense Connect.
+> *NOTE*: If you cannot connect with the provided address, try with the HTTP protocol, the 20010 port and a direct IP address instead (ex: http://192.168.2.19:20010/GetToys).
 
 ## config.json
 Next to the executable should be a config file named "config.json". Open it with any text editor to change its values.
