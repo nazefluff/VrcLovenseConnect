@@ -93,7 +93,7 @@ The setup is not very different from "Proximity" mode. Just change these setting
 ### Contacts Setup
 If you use Dynamic Penetration System by Raliv, for penetrators, Contacts should be at the base, and the radius should have the same length as set in the material settings. Since DPS detection is also spherical, this setup will have 1:1 accuracy.
 
-For orifices that you want to set up with VRCLovenseConnect, you can place Contacts on "Orifice" objects in your avatar, set the center as deep inside the orifices as you want, and adjust the radius to be right at the entrance. Remember, Contact Receivers have to be spherical with "Proximity" on.
+For orifices that you want to set up with VRCLovenseConnect, you can place Contacts on "Orifice" objects in your avatar, set the center as deep inside the orifices as you want, and adjust the radius to be right at the entrance. Remember, Proximity Contact Receivers have to be spherical (Constant Contact Receiver can have any shape).
 
 ### Recommended Contacts Setup
 For a penetrator:
