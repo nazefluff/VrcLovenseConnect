@@ -31,9 +31,14 @@ namespace VrcLovenseConnect.Helpers
         public int RuntimeScanTime => ScanTime * 1000;
 
         /// <summary>
-        /// The number of received messages to skip.
+        /// The number of received command messages to skip.
         /// </summary>
         public int Limit { get; set; }
+
+        /// <summary>
+        /// The number of received non-command messages to skip.
+        /// </summary>
+        public int RetriesLimit => Limit * 10;
 
         /// <summary>
         /// The time to wait between two attempts at receiving messages.

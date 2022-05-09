@@ -9,12 +9,14 @@ namespace VrcLovenseConnect.Helpers
         readonly Config config;
         readonly IToyManager lovenseManager;
         readonly IToyManager buttplugManager;
-        readonly Dictionary<string, double> retries;
+        readonly Dictionary<string, double> retries; // Also include command as ID?
         int nbrMessages;
 
         internal bool Play { get; set; } = true;
 
         internal float Haptics { get; set; }
+
+        internal float ActiveHaptics { get; set; }
 
         internal bool IsBooleanContact { get; set; }
 
@@ -39,18 +41,24 @@ namespace VrcLovenseConnect.Helpers
             oscReceiver.Connect();
             Console.WriteLine($"Connected and listening to {oscReceiver.LocalAddress}:{oscReceiver.RemoteEndPoint.Port}...");
 
+            // Initiates dictionary
+            foreach (var toy in config.Toys)
+                retries[toy.Name] = 0;
+
             // Loops until the program is closed.
             while (Play)
             {
                 try
                 {
                     // Listens for one tick. Non-blocking.
-#if DEBUG
-                    messageReceived = true;
-                    OscPacket packet = new OscMessage("/avatar/parameters/LovenseHaptics", 0.1f);
-#else
+#pragma warning disable S125
+//#if DEBUG
+//                    messageReceived = true;
+//                    OscPacket packet = new OscMessage("/avatar/parameters/LovenseHaptics", 0.1f);
+//#else
                     messageReceived = oscReceiver.TryReceive(out OscPacket packet);
-#endif
+#pragma warning restore S125
+//#endif
 
                     // Message received, sends intensity to command the toy.
                     if (messageReceived)
@@ -76,9 +84,13 @@ namespace VrcLovenseConnect.Helpers
                                     {
 #if DEBUG
                                         Console.WriteLine(message.ToString());
+                                        Logger.LogDebugInfo($"Processing: {message}");
 #endif
                                         // Resets retries for this toy.
                                         retries[toy.Name] = 0;
+
+                                        // Stores current haptics for retries (prevents stopping the toy to fail).
+                                        ActiveHaptics = Haptics > 0 ? Haptics : 1;
 
                                         // Controls the toy.
                                         await CommandToy(toy, message);
@@ -88,7 +100,10 @@ namespace VrcLovenseConnect.Helpers
                                     }
                                     else
                                     {
-                                        // Message has an invalid value, this counts as a no-concern.
+#if DEBUG
+                                        Logger.LogDebugInfo($"Message has a negating value: {message} (retries: {retries[toy.Name]}, active haptics: {ActiveHaptics}, is boolean contact: {IsBooleanContact})");
+#endif
+                                        // Message has a negating value, this counts as a no-concern.
                                         await CountRetries(toy);
                                     }
                                 }
@@ -100,6 +115,9 @@ namespace VrcLovenseConnect.Helpers
                             }
                             else
                             {
+#if DEBUG
+                                Logger.LogDebugInfo($"Message is not a toy command: {message} (retries: {retries[toy.Name]}, active haptics: {ActiveHaptics}, is boolean contact: {IsBooleanContact})");
+#endif
                                 // The received message doesn't concern this toy.
                                 await CountRetries(toy);
                             }
@@ -127,6 +145,8 @@ namespace VrcLovenseConnect.Helpers
 
             IsBooleanContact = false;
             Haptics = 0;
+            ActiveHaptics = 0;
+            retries[toy.Name] = 0;
 
             await toyManager.Vibrate(toy.Name, 0);
             await toyManager.Pump(toy.Name, 0);
@@ -141,9 +161,14 @@ namespace VrcLovenseConnect.Helpers
             // Counts the number of retries for this toy.
             retries[toy.Name]++;
 
-            // No message received for a moment, pauses the toy if started.
-            if (retries[toy.Name] > config.Limit && !IsBooleanContact && Haptics > 0)
+            // No command received for a moment, pauses the toy if started.
+            if (retries[toy.Name] >= config.RetriesLimit && ActiveHaptics > 0)
+            {
+#if DEBUG
+                Logger.LogDebugInfo($"Stopping toy after {retries[toy.Name]} (Haptics value before stopping: {Haptics})");
+#endif
                 await StopToy(toy);
+            }
         }
 
         private void CountMessages()

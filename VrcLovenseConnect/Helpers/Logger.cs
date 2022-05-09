@@ -11,6 +11,8 @@ namespace VrcLovenseConnect.Helpers
         private static FileStream? log;
         private static StreamWriter? logWriter;
         private static bool disposedValue;
+        private static int debugLogs = 0;
+        private static int maxDebugLogs = 10000;
 
         public static void OpenLog(string path)
         {
@@ -21,11 +23,22 @@ namespace VrcLovenseConnect.Helpers
 
         public static void LogException(Exception ex)
         {
-            logWriter?.WriteLine($"[{DateTime.Now}] {ex.Message}");
+            logWriter?.WriteLine($"[{DateTime.Now}] ERROR: {ex.Message}");
 
             if (ex.StackTrace != null)
                 logWriter?.WriteLine(ex.StackTrace);
         }
+
+#if DEBUG
+        public static void LogDebugInfo(string log)
+        {
+            if (debugLogs < maxDebugLogs)
+            {
+                logWriter?.WriteLine($"[{DateTime.Now}] DEBUG: {log}");
+                debugLogs++;
+            }
+        }
+#endif
 
         private static void CloseLog(bool disposing)
         {
