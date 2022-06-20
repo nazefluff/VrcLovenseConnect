@@ -99,14 +99,14 @@ For orifices that you want to set up with VRCLovenseConnect, you can place Conta
 For a penetrator:
 - one Contact Receiver with an "Orifice" custom tag, and "Allow Others" enabled only. You can optionally add standard tags as well.
 - one Contact Sender with a "Penetrator" tag.
-- (Optional) one Contact Receiver with an "OrificeSelf" custom tag, and "Allow Self" enabled only. You can optionally add standard tags as well.
-- (Optional) one Contact Sender with a "PenetratorSelf" tag.
+- (Optional) one Contact Receiver with an "OrificeSelf" custom tag, and "Allow Self" enabled only. You can optionally add standard tags as well. This prevents interfering with orifices on your own avatar that are too close to its own penetrator.
+- (Optional) one Contact Sender with a "PenetratorSelf" tag. This prevents interfering with orifices on your own avatar that are too close to its own penetrator.
 
 For each orifice on which you want toy interactions enabled:
 - one Contact Receiver with a "Penetrator" custom tag, and "Allow Others" enabled only. You can optionally add standard tags as well.
 - one Contact Sender with an "Orifice" tag (can have a different shape than the Receiver).
-- (Optional) one Contact Receiver with a "PenetratorSelf" custom tag, and "Allow Self" enabled only. You can optionally add standard tags as well.
-- (Optional) one Contact Sender with an "OrificeSelf" tag.
+- (Optional) one Contact Receiver with a "PenetratorSelf" custom tag, and "Allow Self" enabled only. You can optionally add standard tags as well. This prevents interfering with a penetrator on your own avatar that is too close to its own orifices.
+- (Optional) one Contact Sender with an "OrificeSelf" tag. This prevents interfering with a penetrator on your own avatar that is too close to its own orifices.
 
 This setup will make sure that you and others can control your toys without any interference. Tags can be changed to be shared only to a few people for a more private use, kind of like a password.
 
