@@ -5,7 +5,7 @@ VRCLovenseConnect is a .NET implementation of the Lovense Connect API and Buttpl
 **It does NOT use mods to function, so it won't get blocked by EAC**. Though keep in mind that this tool, if used in Public and Friends+ worlds, goes against VRChat's terms of service. The creator of this program is not held responsible for any ban.
 
 # NEW! Prefabs for an easy DPS-compatible setup available [here](https://github.com/PingerSurprise/VrcLovenseConnect/releases/download/v0.4.5-beta/VRCLC_Prefabs.unitypackage)!
-Just drop both \VRCLC_Penetrator prefabs in your penetrator object, and both \VRCLC_Orifice prefabs in your orifice object(s), adjust the radius and positions if necessary and your avatar is ready! More details in the DPS section.
+Just drop both VRCLC_Penetrator prefabs in your penetrator object, and both VRCLC_Orifice prefabs in your orifice object(s), adjust the radius and positions if necessary and your avatar is ready! More details in the DPS section.
 
 ## What does it do exactly?
 With the power of **OSC** and **Avatar Dynamics**, your avatar sends values between 0.0 and 1.0 to this program through UDP. This value is converted and transferred to either a Buttplug.io compatible toy through Bluetooth, or to a phone with the Lovense Connect app within the same network through HTTP, which will transfer commands to each connected toys.
