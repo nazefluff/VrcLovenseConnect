@@ -1,6 +1,8 @@
 # VRCLovenseConnect
 VRCLovenseConnect is a .NET implementation of the Lovense Connect API and Buttplug.io to synchronize **any connected toy** with a VRChat avatar through OSC messages.
 
+# NEW! Prefabs for avatar setup available [here](https://github.com/PingerSurprise/VrcLovenseConnect/releases/download/v0.4.5-beta/VRCLC_Prefabs.unitypackage)!
+
 ## What does it do exactly?
 With the power of **OSC** and **Avatar Dynamics**, your avatar sends values between 0.0 and 1.0 to this program through UDP. This value is converted and transferred to either a Buttplug.io compatible toy through Bluetooth, or to a phone with the Lovense Connect app within the same network through HTTP, which will transfer commands to each connected toys.
 
