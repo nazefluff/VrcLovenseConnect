@@ -1,4 +1,8 @@
 ﻿using Newtonsoft.Json;
+using System;
+using System.IO;
+using System.Linq;
+using System.Threading.Tasks;
 using VrcLovenseConnect.Helpers;
 using VrcLovenseConnect.ToyManagers;
 
@@ -30,10 +34,17 @@ if (!config.ControlParameters())
 using IToyManager lovenseManager = new LovenseManager(config.Address);
 using IToyManager buttplugManager = new ButtplugManager(config.RuntimeScanTime, (uint)config.Limit);
 
-Console.WriteLine("Scanning toys through Bluetooth...");
-await buttplugManager.FindToy();
-Console.WriteLine("Scanning toys through Lovense Connect...");
-await lovenseManager.FindToy();
+if (config.useBluetooth)
+{
+    Console.WriteLine("Scanning toys through Bluetooth...");
+    await buttplugManager.FindToy();
+}
+
+if (config.useLovenseConnect)
+{
+    Console.WriteLine("Scanning toys through Lovense Connect...");
+    await lovenseManager.FindToy();
+}
 
 if (!lovenseManager.IsToyFound && !buttplugManager.IsToyFound)
 {
@@ -61,7 +72,7 @@ config.Toys.RemoveAll(toy => string.IsNullOrWhiteSpace(toy.Name)
 || (toy.Protocol == "Lovense" && !lovenseManager.ToyNames.Contains(toy.Name))
 || (toy.Protocol == "Buttplug" && !buttplugManager.ToyNames.Contains(toy.Name)));
 
-ConsoleHelper.PrintInfo("INFO: Although an attempt to stop the toys will be happening before closing the program, you may still have to manually turn them off.");
+// ConsoleHelper.PrintInfo("INFO: Although an attempt to stop the toys will be happening before closing the program, you may still have to manually turn them off.");
 
 oscModule = new OscModule(config, lovenseManager, buttplugManager);
 

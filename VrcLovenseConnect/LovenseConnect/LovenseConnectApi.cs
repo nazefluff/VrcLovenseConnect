@@ -1,7 +1,14 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
+using System;
+using System.Collections.Generic;
 using System.Diagnostics;
+using System.Linq;
+using System.Net.Http;
 using System.Reflection;
+using System.Threading;
+using System.Threading.Tasks;
+using VrcLovenseConnect.Helpers;
 
 /// <summary>
 /// The Namespace Of The Lovense Connect API; Created By Plague.
@@ -156,6 +163,7 @@ namespace LovenseConnect
                 if (!InitCommand(id, amount, ignoreDuplicateRequests, "Vibrate", out var toy))
                     return false;
 
+                ConsoleHelper.Tell("Vibrating Toy " + toy?.Name + " (v=" + amount + ", t=" + toy?.Id + ")");
                 using var packet = await Client.GetAsync(url.ToLower().Replace("/gettoys", "") + "/Vibrate?v=" + amount + "&t=" + toy?.Id ?? string.Empty);
                 using var content = packet.Content;
                 var response = await content.ReadAsStringAsync();
@@ -221,6 +229,7 @@ namespace LovenseConnect
                 if (!InitCommand(id, amount, ignoreDuplicateRequests, "Rotate", out var toy))
                     return false;
 
+                ConsoleHelper.Tell("Rotating Toy " + toy?.Name + " (v=" + amount + ", t=" + toy?.Id + ")");
                 using var rotatePacket = await Client.GetAsync(url.ToLower().Replace("/gettoys", "") + "/Rotate?v=" + amount + "&t=" + toy?.Id);
                 using var rotateContent = rotatePacket.Content;
                 var response = await rotateContent.ReadAsStringAsync();
@@ -250,6 +259,7 @@ namespace LovenseConnect
                 if (!InitCommand(id, amount, ignoreDuplicateRequests, "AirAuto", out var toy))
                     return false;
 
+                ConsoleHelper.Tell("Pumping Toy " + toy?.Name + " (v=" + amount + ", t=" + toy?.Id + ")");
                 using var airAutoPacket = await Client.GetAsync(url.ToLower().Replace("/gettoys", "") + "/AirAuto?v=" + amount + "&t=" + toy?.Id);
                 using var airAutoContent = airAutoPacket.Content;
                 var response = await airAutoContent.ReadAsStringAsync();

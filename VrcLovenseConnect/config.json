@@ -1,58 +1,60 @@
 {
-  "oscPort": 9001,
-  "address": "https://192-168-1-57.lovense.club:30010/GetToys",
-  "scanTime": 5,
-  "limit": 10,
-  "toys": [
-    {
-        "name": "",
-        "protocol": "",
-        "vibrateParameter": "LovenseHaptics",
-        "vibrateIntensity": "0.5",
-        "pumpParameter": "LovenseHaptics",
-        "pumpIntensity": "0.5",
-        "rotateParameter": "LovenseHaptics",
-        "rotateIntensity": "0.5"
-    },
-    {
-        "name": "",
-        "protocol": "",
-        "vibrateParameter": "LovenseHaptics",
-        "vibrateIntensity": "0.5",
-        "pumpParameter": "LovenseHaptics",
-        "pumpIntensity": "0.5",
-        "rotateParameter": "LovenseHaptics",
-        "rotateIntensity": "0.5"
-    },
-    {
-        "name": "",
-        "protocol": "",
-        "vibrateParameter": "LovenseHaptics",
-        "vibrateIntensity": "0.5",
-        "pumpParameter": "LovenseHaptics",
-        "pumpIntensity": "0.5",
-        "rotateParameter": "LovenseHaptics",
-        "rotateIntensity": "0.5"
-    },
-    {
-        "name": "",
-        "protocol": "",
-        "vibrateParameter": "LovenseHaptics",
-        "vibrateIntensity": "0.5",
-        "pumpParameter": "LovenseHaptics",
-        "pumpIntensity": "0.5",
-        "rotateParameter": "LovenseHaptics",
-        "rotateIntensity": "0.5"
-    },
-    {
-        "name": "",
-        "protocol": "",
-        "vibrateParameter": "LovenseHaptics",
-        "vibrateIntensity": "0.5",
-        "pumpParameter": "LovenseHaptics",
-        "pumpIntensity": "0.5",
-        "rotateParameter": "LovenseHaptics",
-        "rotateIntensity": "0.5"
-    }
-  ]
+    "oscPort": 9001,
+    "address": "http://69.69.10.1:20010/GetToys",
+    "useBluetooth": false,
+    "useLovenseConnect": true,
+    "scanTime": 5,
+    "limit": 10,
+    "toys": [
+        {
+            "name": "Max",
+            "protocol": "Lovense",
+            "vibrateParameter": "LovenseHaptics",
+            "vibrateIntensity": 1,
+            "pumpParameter": "LovenseHapticsPump",
+            "pumpIntensity": 1,
+            "rotateParameter": "LovenseHapticsRotate",
+            "rotateIntensity": 1
+        },
+        {
+            "name": "Edge",
+            "protocol": "Lovense",
+            "vibrateParameter": "UwuEdgeVib",
+            "vibrateIntensity": 1,
+            "pumpParameter": "UwuEdgePump",
+            "pumpIntensity": 1,
+            "rotateParameter": "UwuEdgeRot",
+            "rotateIntensity": 1
+        },
+        {
+            "name": "",
+            "protocol": "",
+            "vibrateParameter": "LovenseHaptics",
+            "vibrateIntensity": "1",
+            "pumpParameter": "LovenseHaptics",
+            "pumpIntensity": "1",
+            "rotateParameter": "LovenseHaptics",
+            "rotateIntensity": "1"
+        },
+        {
+            "name": "",
+            "protocol": "",
+            "vibrateParameter": "LovenseHaptics",
+            "vibrateIntensity": "1",
+            "pumpParameter": "LovenseHaptics",
+            "pumpIntensity": "1",
+            "rotateParameter": "LovenseHaptics",
+            "rotateIntensity": "1"
+        },
+        {
+            "name": "",
+            "protocol": "",
+            "vibrateParameter": "LovenseHaptics",
+            "vibrateIntensity": "1",
+            "pumpParameter": "LovenseHaptics",
+            "pumpIntensity": "1",
+            "rotateParameter": "LovenseHaptics",
+            "rotateIntensity": "1"
+        }
+    ]
 }

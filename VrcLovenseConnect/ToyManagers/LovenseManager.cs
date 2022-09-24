@@ -1,4 +1,8 @@
-﻿using VrcLovenseConnect.Helpers;
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Threading.Tasks;
+using VrcLovenseConnect.Helpers;
 using static LovenseConnect.LovenseConnectApi;
 
 namespace VrcLovenseConnect.ToyManagers

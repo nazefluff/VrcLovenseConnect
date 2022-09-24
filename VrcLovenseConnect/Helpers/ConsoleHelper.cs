@@ -19,9 +19,15 @@ namespace VrcLovenseConnect.Helpers
             Console.ReadKey(true);
         }
 
-        internal static void PrintInfo(string message)
+        internal static void Tell(string message)
         {
             Console.ForegroundColor = ConsoleColor.Cyan;
+            Console.WriteLine(" > " + message);
+            Console.ForegroundColor = DefaultColor;
+        }
+        internal static void PrintInfo(string message)
+        {
+            Console.ForegroundColor = ConsoleColor.Magenta;
             Console.WriteLine(message);
             Console.ForegroundColor = DefaultColor;
         }

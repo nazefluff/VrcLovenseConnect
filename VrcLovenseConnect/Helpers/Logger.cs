@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -14,19 +15,21 @@ namespace VrcLovenseConnect.Helpers
         private static int debugLogs = 0;
         private static int maxDebugLogs = 10000;
 
+        public static StreamWriter? LogWriter { get => logWriter; set => logWriter = value; }
+
         public static void OpenLog(string path)
         {
             log = new FileStream(path, FileMode.OpenOrCreate, FileAccess.ReadWrite);
-            logWriter = new StreamWriter(log);
-            logWriter.AutoFlush = true;
+            LogWriter = new StreamWriter(log);
+            LogWriter.AutoFlush = true;
         }
 
         public static void LogException(Exception ex)
         {
-            logWriter?.WriteLine($"[{DateTime.Now}] ERROR: {ex.Message}");
+            LogWriter?.WriteLine($"[{DateTime.Now}] ERROR: {ex.Message}");
 
             if (ex.StackTrace != null)
-                logWriter?.WriteLine(ex.StackTrace);
+                LogWriter?.WriteLine(ex.StackTrace);
         }
 
 #if DEBUG
@@ -34,7 +37,7 @@ namespace VrcLovenseConnect.Helpers
         {
             if (debugLogs < maxDebugLogs)
             {
-                logWriter?.WriteLine($"[{DateTime.Now}] DEBUG: {log}");
+                LogWriter?.WriteLine($"[{DateTime.Now}] DEBUG: {log}");
                 debugLogs++;
             }
         }
@@ -46,7 +49,7 @@ namespace VrcLovenseConnect.Helpers
             {
                 if (disposing)
                 {
-                    logWriter?.Dispose();
+                    LogWriter?.Dispose();
                     log?.Dispose();
                 }
 

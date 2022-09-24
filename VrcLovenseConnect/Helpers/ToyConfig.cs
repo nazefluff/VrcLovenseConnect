@@ -75,11 +75,11 @@ namespace VrcLovenseConnect.Helpers
             Name = string.Empty;
             Protocol = string.Empty;
             VibrateParameter = string.Empty;
-            VibrateIntensity = 0;
+            VibrateIntensity = 1;
             PumpParameter = string.Empty;
-            PumpIntensity = 0;
+            PumpIntensity = 1;
             RotateParameter = string.Empty;
-            RotateIntensity = 0;
+            RotateIntensity = 1;
         }
 
         public bool ControlParameters()

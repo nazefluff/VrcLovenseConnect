@@ -19,6 +19,12 @@ namespace VrcLovenseConnect.Helpers
         /// </summary>
         public string Address { get; set; }
 
+        ///"useBluetooth": false,
+        public bool useBluetooth { get; set; }
+
+        ///"useLovenseConnect": true,
+        public bool useLovenseConnect { get; set; }
+
         /// <summary>
         /// The time to scan for a toy in seconds.
         /// </summary>

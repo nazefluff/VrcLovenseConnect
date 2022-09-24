@@ -1,5 +1,10 @@
 ﻿using Rug.Osc;
+using System;
+using System.Collections.Generic;
+using System.Linq;
 using System.Net;
+using System.Threading;
+using System.Threading.Tasks;
 using VrcLovenseConnect.ToyManagers;
 
 namespace VrcLovenseConnect.Helpers
@@ -83,7 +88,7 @@ namespace VrcLovenseConnect.Helpers
                                     if (IsBooleanContact || Haptics > 0)
                                     {
 #if DEBUG
-                                        Console.WriteLine(message.ToString());
+                                        // Console.WriteLine(message.ToString());
                                         Logger.LogDebugInfo($"Processing: {message}");
 #endif
                                         // Resets retries for this toy.
@@ -151,8 +156,9 @@ namespace VrcLovenseConnect.Helpers
             await toyManager.Vibrate(toy.Name, 0);
             await toyManager.Pump(toy.Name, 0);
             await toyManager.Rotate(toy.Name, 0);
+            
 #if DEBUG
-            Console.WriteLine("Vibration stopped.");
+            Console.WriteLine("Toy stopped.");
 #endif
         }
 

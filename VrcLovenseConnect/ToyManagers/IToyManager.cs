@@ -1,4 +1,8 @@
-﻿namespace VrcLovenseConnect.ToyManagers
+﻿using System;
+using System.Collections.Generic;
+using System.Threading.Tasks;
+
+namespace VrcLovenseConnect.ToyManagers
 {
     internal interface IToyManager : IDisposable
     {
