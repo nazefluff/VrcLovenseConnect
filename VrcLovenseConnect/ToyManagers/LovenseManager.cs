@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading;
 using System.Threading.Tasks;
 using VrcLovenseConnect.Helpers;
 using static LovenseConnect.LovenseConnectApi;
@@ -52,13 +53,38 @@ namespace VrcLovenseConnect.ToyManagers
             }
         }
 
-        public async Task Vibrate(string toyName, float haptics)
+        public async Task All(string toyName, int intensity)
         {
             var toy = toys.FirstOrDefault(t => t.Name == toyName);
 
             // Scales the received value to Lovense's Vibration scale (0-20).
             // Source: https://fr.lovense.com/sextoys/developer/doc#solution-3-cam-kit-step3
-            int intensity = (int)Math.Ceiling(haptics * 20.0f);
+            // int intensity = (int)Math.Round(haptics * 20.0f);
+
+            // Vibrates the toy with the set intensity.
+            if (toy != null && !toy.AllUnsupported)
+            {
+                try
+                {
+                    await AllToy(address, toy.Id ?? string.Empty, intensity, true);
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogException(ex);
+
+                    // If any error happens, disables the feature for safety.
+                    toy.AllUnsupported = true;
+                }
+            }
+        }
+
+        public async Task Vibrate(string toyName, int intensity)
+        {
+            var toy = toys.FirstOrDefault(t => t.Name == toyName);
+
+            // Scales the received value to Lovense's Vibration scale (0-20).
+            // Source: https://fr.lovense.com/sextoys/developer/doc#solution-3-cam-kit-step3
+            // int intensity = (int)Math.Round(haptics * 20.0f);
 
             // Vibrates the toy with the set intensity.
             if (toy != null && !toy.VibrateUnsupported)
@@ -77,13 +103,13 @@ namespace VrcLovenseConnect.ToyManagers
             }
         }
 
-        public async Task Rotate(string toyName, float haptics)
+        public async Task Rotate(string toyName, int intensity)
         {
             var toy = toys.FirstOrDefault(t => t.Name == toyName);
 
             // Scales the received value to Lovense's Rotation scale (0-20).
             // Source: https://fr.lovense.com/sextoys/developer/doc#solution-3-cam-kit-step3
-            int intensity = (int)Math.Ceiling(haptics * 20.0f);
+            // int intensity = (int)Math.Ceiling(haptics * 20.0f);
 
             // Vibrates the toy with the set intensity.
             if (toy != null && !toy.RotateUnsupported)
@@ -102,13 +128,13 @@ namespace VrcLovenseConnect.ToyManagers
             }
         }
 
-        public async Task Pump(string toyName, float haptics)
+        public async Task Pump(string toyName, int intensity)
         {
             var toy = toys.FirstOrDefault(t => t.Name == toyName);
 
             // Scales the received value to Lovense's AutoAir scale (0-3).
             // Source: https://fr.lovense.com/sextoys/developer/doc#solution-3-cam-kit-step3
-            int intensity = (int)Math.Ceiling(haptics * 3.0f);
+            // int intensity = (int)Math.Ceiling(haptics * 3.0f);
 
             // Vibrates the toy with the set intensity.
             if (toy != null && !toy.LinearUnsupported)

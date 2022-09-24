@@ -4,7 +4,7 @@
     "useBluetooth": false,
     "useLovenseConnect": true,
     "scanTime": 5,
-    "limit": 10,
+    "limit": 2,
     "toys": [
         {
             "name": "Max",

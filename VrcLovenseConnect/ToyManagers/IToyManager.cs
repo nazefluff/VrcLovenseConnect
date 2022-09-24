@@ -12,10 +12,12 @@ namespace VrcLovenseConnect.ToyManagers
 
         Task FindToy();
 
-        Task Vibrate(string toyName, float haptics);
+        Task All(string toyName, int intensity);
 
-        Task Rotate(string toyName, float haptics);
+        Task Vibrate(string toyName, int intensity);
 
-        Task Pump(string toyName, float haptics);
+        Task Rotate(string toyName, int intensity);
+
+        Task Pump(string toyName, int intensity);
     }
 }

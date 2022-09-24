@@ -61,18 +61,44 @@ namespace VrcLovenseConnect.ToyManagers
             toys = client.Devices.Select(toy => new ButtplugToy(toy)).ToList();
         }
 
-        public async Task Vibrate(string toyName, float haptics)
+        public async Task All(string toyName, int intensivity)
+        {
+            var toy = toys.FirstOrDefault(t => t.Toy.Name == toyName);
+
+            if (toy != null && !toy.AllUnsupported)
+            {
+                currentHaptics[(toyName, "Vibrate")] = intensivity;
+                currentHaptics[(toyName, "Rotate")] = intensivity;
+                currentHaptics[(toyName, "Pump")] = intensivity;
+
+                try
+                {
+                    await toy.Toy.SendVibrateCmd(0.0f);
+                    await toy.Toy.SendRotateCmd(0.0f, true);
+                    await toy.Toy.SendLinearCmd(1, 0.0f);
+                }
+                catch (Exception ex)
+                {
+                    Logger.LogException(ex);
+
+                    // If any error happens, disables the feature for safety.
+                    toy.AllUnsupported = true;
+                }
+            }
+        }
+
+        public async Task Vibrate(string toyName, int intensivity)
         {
             var toy = toys.FirstOrDefault(t => t.Toy.Name == toyName);
 
             if (toy != null && !toy.VibrateUnsupported
-                && (!currentHaptics.ContainsKey((toyName, "Vibrate")) || currentHaptics[(toyName, "Vibrate")] != haptics))
+                && (!currentHaptics.ContainsKey((toyName, "Vibrate")) || currentHaptics[(toyName, "Vibrate")] != intensivity))
             {
-                currentHaptics[(toyName, "Vibrate")] = haptics;
+                currentHaptics[(toyName, "Vibrate")] = intensivity;
 
                 try
                 {
-                    await toy.Toy.SendVibrateCmd(haptics);
+                    await toy.Toy.SendVibrateCmd(intensivity);
                 }
                 catch (Exception ex)
                 {
@@ -84,18 +110,18 @@ namespace VrcLovenseConnect.ToyManagers
             }
         }
 
-        public async Task Rotate(string toyName, float haptics)
+        public async Task Rotate(string toyName, int intensivity)
         {
             var toy = toys.FirstOrDefault(t => t.Toy.Name == toyName);
 
             if (toy != null && !toy.RotateUnsupported
-                && (!currentHaptics.ContainsKey((toyName, "Rotate")) || currentHaptics[(toyName, "Rotate")] != haptics))
+                && (!currentHaptics.ContainsKey((toyName, "Rotate")) || currentHaptics[(toyName, "Rotate")] != intensivity))
             {
-                currentHaptics[(toyName, "Rotate")] = haptics;
+                currentHaptics[(toyName, "Rotate")] = intensivity;
 
                 try
                 {
-                    await toy.Toy.SendRotateCmd(haptics, true);
+                    await toy.Toy.SendRotateCmd(intensivity, true);
                 }
                 catch (Exception ex)
                 {
@@ -107,18 +133,18 @@ namespace VrcLovenseConnect.ToyManagers
             }
         }
 
-        public async Task Pump(string toyName, float haptics)
+        public async Task Pump(string toyName, int intensivity)
         {
             var toy = toys.FirstOrDefault(t => t.Toy.Name == toyName);
 
             if (toy != null && !toy.LinearUnsupported
-                && (!currentHaptics.ContainsKey((toyName, "Pump")) || currentHaptics[(toyName, "Pump")] != haptics))
+                && (!currentHaptics.ContainsKey((toyName, "Pump")) || currentHaptics[(toyName, "Pump")] != intensivity))
             {
-                currentHaptics[(toyName, "Pump")] = haptics;
+                currentHaptics[(toyName, "Pump")] = intensivity;
 
                 try
                 {
-                    await toy.Toy.SendLinearCmd(moveSpeed, haptics);
+                    await toy.Toy.SendLinearCmd(moveSpeed, intensivity);
                 }
                 catch (Exception ex)
                 {
