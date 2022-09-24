@@ -88,7 +88,7 @@ namespace VrcLovenseConnect.Helpers
                                     if (IsBooleanContact || Haptics > 0)
                                     {
 #if DEBUG
-                                        // Console.WriteLine(message.ToString());
+                                        Console.WriteLine(message.ToString());
                                         Logger.LogDebugInfo($"Processing: {message}");
 #endif
                                         // Resets retries for this toy.
