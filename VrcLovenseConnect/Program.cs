@@ -14,7 +14,6 @@ ConsoleHelper.PrintInfo("VRCLovenseConnect (beta)");
 
 string configFile = File.ReadAllText("config.json");
 Config? config = JsonConvert.DeserializeObject<Config>(configFile);
-Console.WriteLine(JsonConvert.SerializeObject(config));
 
 if (config == null) {
     ConsoleHelper.PrintError("Error in configuration file. Please check its format.");

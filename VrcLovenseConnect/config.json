@@ -1,59 +1,47 @@
 {
-    "oscPort": 9001,
     "address": "http://69.69.10.1:20010",
-    "scanTime": 5,
-    "limit": 2,
+    "oscPort": 9001,
     "stopDelay": 2,
     "toys": [
         {
             "name": "Max",
             "protocol": "Lovense",
+            "intensity": 1,
             "vibrateParameter": "OSCPeen",
             "pumpParameter": "OSCPeen",
-            "rotateParameter": "OSCPeen",
-            "vibrateIntensity": 1,
-            "pumpIntensity": 1,
-            "rotateIntensity": 1
+            "rotateParameter": "OSCPeen"
         },
         {
             "name": "Edge",
             "protocol": "Lovense",
+            "intensity": 1,
             "vibrateParameter": "OSCBooty",
             "pumpParameter": "OSCBooty",
-            "rotateParameter": "OSCBooty",
-            "vibrateIntensity": 1,
-            "pumpIntensity": 1,
-            "rotateIntensity": 1
+            "rotateParameter": "OSCBooty"
         },
         {
             "name": "Hush",
             "protocol": "Lovense",
+            "intensity": 1,
             "vibrateParameter": "OSCBooty",
             "pumpParameter": "OSCBooty",
-            "rotateParameter": "OSCBooty",
-            "vibrateIntensity": 1,
-            "pumpIntensity": 1,
-            "rotateIntensity": 1
+            "rotateParameter": "OSCBooty"
         },
         {
             "name": "",
             "protocol": "",
+            "intensity": 1,
             "vibrateParameter": "LovenseHaptics",
-            "vibrateIntensity": "1",
             "pumpParameter": "LovenseHaptics",
-            "pumpIntensity": "1",
-            "rotateParameter": "LovenseHaptics",
-            "rotateIntensity": "1"
+            "rotateParameter": "LovenseHaptics"
         },
         {
             "name": "",
             "protocol": "",
+            "intensity": 1,
             "vibrateParameter": "LovenseHaptics",
-            "vibrateIntensity": "1",
             "pumpParameter": "LovenseHaptics",
-            "pumpIntensity": "1",
-            "rotateParameter": "LovenseHaptics",
-            "rotateIntensity": "1"
+            "rotateParameter": "LovenseHaptics"
         }
     ]
 }

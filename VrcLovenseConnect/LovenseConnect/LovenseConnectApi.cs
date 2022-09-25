@@ -96,10 +96,11 @@ namespace LovenseConnect {
 
         public static bool IsRequestPending { get; set; } = false;
 
+        public static int RqCount { get; set; } = 0;
+
         public static Stopwatch DelayWatch { get; set; } = new Stopwatch();
 
         private static async Task<bool> SendRq(String Url, String UrlParams) {
-            Console.WriteLine(Url + UrlParams);
             var packet = await Client.GetAsync(Url + UrlParams);
             var response = await packet.Content.ReadAsStringAsync();
             if (!string.IsNullOrEmpty(response) && !response.ToLower().Contains("\"ok\"")) {
@@ -114,7 +115,8 @@ namespace LovenseConnect {
                 if (!await InitCommand(toy, amount, ignoreDuplicateRequests, "Vibrate"))
                     return false;
 
-                ConsoleHelper.Tell("Vibrating \"" + toy.Name + "\" (" + amount + ")");
+                RqCount++;
+                ConsoleHelper.Tell(RqCount + ". Vibrating \"" + toy.Name + "\" (" + amount + ")");
                 if (await SendRq(toy.VibrateUrl, "v=" + amount))
                     return await EndCommand(toy.Id, "Vibrate", amount);
 
@@ -130,7 +132,8 @@ namespace LovenseConnect {
                 if (!await InitCommand(toy, amount, ignoreDuplicateRequests, "Rotate"))
                     return false;
 
-                ConsoleHelper.Tell("Rotating \"" + toy.Name + "\" (" + amount + ")");
+                RqCount++;
+                ConsoleHelper.Tell(RqCount + ". Rotating  \"" + toy.Name + "\" (" + amount + ")");
                 if (await SendRq(toy.RotateUrl, "v=" + amount))
                     return await EndCommand(toy.Id, "Rotate", amount);
 
@@ -146,8 +149,9 @@ namespace LovenseConnect {
                 if (!await InitCommand(toy, amount, ignoreDuplicateRequests, "AirAuto"))
                     return false;
 
-                ConsoleHelper.Tell("Pumping \"" + toy.Name + "\" (" + amount + ")");
-                if (await SendRq(toy.PumpUrl, "v=" + amount))
+                RqCount++;
+                ConsoleHelper.Tell(RqCount + ". Pumping   \"" + toy.Name + "\" (" + amount + ")");
+                if (await SendRq(toy.PumpUrl, "a=" + amount))
                     return await EndCommand(toy.Id, "AirAuto", amount);
 
                 return false;
@@ -164,11 +168,8 @@ namespace LovenseConnect {
             }
 
             if (IsRequestPending) {
-                await Task.Delay(40);
-                if (IsRequestPending) {
-                    Console.WriteLine("(Skip: Pending " + command + amount + ")");
-                    return false;
-                }
+                Console.WriteLine("(Skip: Pending " + command + amount + ")");
+                return false;
             }
 
             DelayWatch.Reset();
@@ -190,7 +191,7 @@ namespace LovenseConnect {
                 CurrentLovenseAmount[(id, command)] = amount;
 
             IsRequestPending = false;
-            await Task.Delay(20);
+            // await Task.Delay(20);
             return true;
         }
     }

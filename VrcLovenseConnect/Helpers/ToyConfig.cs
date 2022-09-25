@@ -12,9 +12,7 @@ namespace VrcLovenseConnect.Helpers {
         public string VibrateParameter { get; set; }
         public string PumpParameter { get; set; }
         public string RotateParameter { get; set; }
-        public float VibrateIntensity { get; set; }
-        public float PumpIntensity { get; set; }
-        public float RotateIntensity { get; set; }
+        public float Intensity { get; set; }
 
         [JsonIgnore]
         public string VibrateAddress => $"/avatar/parameters/{VibrateParameter}";
@@ -29,9 +27,7 @@ namespace VrcLovenseConnect.Helpers {
             VibrateParameter = string.Empty;
             PumpParameter = string.Empty;
             RotateParameter = string.Empty;
-            VibrateIntensity = 1;
-            PumpIntensity = 1;
-            RotateIntensity = 1;
+            Intensity = 1;
         }
 
         public bool ControlParameters() {
@@ -41,7 +37,7 @@ namespace VrcLovenseConnect.Helpers {
                 return false;
             }
 
-            if (VibrateIntensity <= 0) {
+            if (Intensity <= 0) {
                 ConsoleHelper.PrintError("Vibration intensity error in configuration file. Pleaser enter a non-zero, positive value.");
                 ConsoleHelper.AwaitUserKeyPress();
                 return false;
@@ -53,20 +49,8 @@ namespace VrcLovenseConnect.Helpers {
                 return false;
             }
 
-            if (PumpIntensity <= 0) {
-                ConsoleHelper.PrintError("Pumping intensity error in configuration file. Pleaser enter a non-zero, positive value.");
-                ConsoleHelper.AwaitUserKeyPress();
-                return false;
-            }
-
             if (string.IsNullOrWhiteSpace(RotateParameter)) {
                 ConsoleHelper.PrintError("Rotation Avatar Parameter error in configuration file. Please enter a valid name.");
-                ConsoleHelper.AwaitUserKeyPress();
-                return false;
-            }
-
-            if (RotateIntensity <= 0) {
-                ConsoleHelper.PrintError("Rotation intensity error in configuration file. Pleaser enter a non-zero, positive value.");
                 ConsoleHelper.AwaitUserKeyPress();
                 return false;
             }
