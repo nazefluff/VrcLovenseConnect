@@ -2,17 +2,13 @@
 using System.Collections.Generic;
 using System.Threading.Tasks;
 
-namespace VrcLovenseConnect.ToyManagers
-{
-    internal interface IToyManager : IDisposable
-    {
+namespace VrcLovenseConnect.ToyManagers {
+    internal interface IToyManager : IDisposable {
         IEnumerable<string> ToyNames { get; }
 
         bool IsToyFound { get; }
 
-        Task FindToy();
-
-        Task All(string toyName, int intensity);
+        Task FindToy(int stopDelay = 2);
 
         Task Vibrate(string toyName, int intensity);
 

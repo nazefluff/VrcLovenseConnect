@@ -1,40 +1,39 @@
 {
     "oscPort": 9001,
-    "address": "http://69.69.10.1:20010/GetToys",
-    "useBluetooth": false,
-    "useLovenseConnect": true,
+    "address": "http://69.69.10.1:20010",
     "scanTime": 5,
     "limit": 2,
+    "stopDelay": 2,
     "toys": [
         {
             "name": "Max",
             "protocol": "Lovense",
-            "vibrateParameter": "LovenseHaptics",
+            "vibrateParameter": "OSCPeen",
+            "pumpParameter": "OSCPeen",
+            "rotateParameter": "OSCPeen",
             "vibrateIntensity": 1,
-            "pumpParameter": "LovenseHapticsPump",
             "pumpIntensity": 1,
-            "rotateParameter": "LovenseHapticsRotate",
             "rotateIntensity": 1
         },
         {
             "name": "Edge",
             "protocol": "Lovense",
-            "vibrateParameter": "UwuEdgeVib",
+            "vibrateParameter": "OSCBooty",
+            "pumpParameter": "OSCBooty",
+            "rotateParameter": "OSCBooty",
             "vibrateIntensity": 1,
-            "pumpParameter": "UwuEdgePump",
             "pumpIntensity": 1,
-            "rotateParameter": "UwuEdgeRot",
             "rotateIntensity": 1
         },
         {
-            "name": "",
-            "protocol": "",
-            "vibrateParameter": "LovenseHaptics",
-            "vibrateIntensity": "1",
-            "pumpParameter": "LovenseHaptics",
-            "pumpIntensity": "1",
-            "rotateParameter": "LovenseHaptics",
-            "rotateIntensity": "1"
+            "name": "Hush",
+            "protocol": "Lovense",
+            "vibrateParameter": "OSCBooty",
+            "pumpParameter": "OSCBooty",
+            "rotateParameter": "OSCBooty",
+            "vibrateIntensity": 1,
+            "pumpIntensity": 1,
+            "rotateIntensity": 1
         },
         {
             "name": "",
